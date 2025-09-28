@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bgrr857fbe8yt"]
+[gd_scene load_steps=14 format=4 uid="uid://bgrr857fbe8yt"]
 
 [ext_resource type="Texture2D" uid="uid://bkqv5mmp0ataj" path="res://images/icon.jpg" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://bm0wfcogjh840" path="res://node_2d.gd" id="1_0hol4"]
@@ -9,9 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://b8y45vfoy1r50" path="res://Sprite-0005.png" id="6_kdubu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
-size = Vector2(26, 26)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rj586"]
 
@@ -856,6 +853,7 @@ script = ExtResource("1_0hol4")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -866,14 +864,6 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_0e48y")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-
-[node name="HazardSensor" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 0
-
-[node name="HazardDetector" type="CollisionShape2D" parent="CharacterBody2D/HazardSensor"]
-position = Vector2(-213, 38)
-shape = SubResource("RectangleShape2D_kdubu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_rj586")
