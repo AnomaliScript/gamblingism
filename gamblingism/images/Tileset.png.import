@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct8ci4qnalh4b"
-path="res://.godot/imported/BLUE_RING-sheet.png-918ec8369da4bdfaf9a22588fc0ddabf.ctex"
+uid="uid://4256cn5edrr2"
+path="res://.godot/imported/Tileset.png-5ac612d78eb5bba78b9a1321082202be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BLUE_RING-sheet.png"
-dest_files=["res://.godot/imported/BLUE_RING-sheet.png-918ec8369da4bdfaf9a22588fc0ddabf.ctex"]
+source_file="res://images/Tileset.png"
+dest_files=["res://.godot/imported/Tileset.png-5ac612d78eb5bba78b9a1321082202be.ctex"]
 
 [params]
 
