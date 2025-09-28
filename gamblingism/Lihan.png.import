@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c156w6biv35ns"
-path="res://.godot/imported/Textures-16.png-e4ac168c7386eb54e825c96163de356d.ctex"
+uid="uid://dcetwkhv6yhg"
+path="res://.godot/imported/Lihan.png-c826fb772aa5d6e976eb3c4ee7e372e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Textures-16.png"
-dest_files=["res://.godot/imported/Textures-16.png-e4ac168c7386eb54e825c96163de356d.ctex"]
+source_file="res://Lihan.png"
+dest_files=["res://.godot/imported/Lihan.png-c826fb772aa5d6e976eb3c4ee7e372e7.ctex"]
 
 [params]
 

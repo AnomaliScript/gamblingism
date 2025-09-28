@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c156w6biv35ns"
-path="res://.godot/imported/Textures-16.png-e4ac168c7386eb54e825c96163de356d.ctex"
+uid="uid://ct8ci4qnalh4b"
+path="res://.godot/imported/BLUE_RING-sheet.png-918ec8369da4bdfaf9a22588fc0ddabf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/Textures-16.png"
-dest_files=["res://.godot/imported/Textures-16.png-e4ac168c7386eb54e825c96163de356d.ctex"]
+source_file="res://BLUE_RING-sheet.png"
+dest_files=["res://.godot/imported/BLUE_RING-sheet.png-918ec8369da4bdfaf9a22588fc0ddabf.ctex"]
 
 [params]
 
