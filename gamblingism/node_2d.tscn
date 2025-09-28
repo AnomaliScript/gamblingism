@@ -847,15 +847,15 @@ texture = ExtResource("6_kdubu")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.359718, -5.93534, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_rj586"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_d21ai")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_0hol4")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-collision_layer = 2
+collision_layer = 3
 script = ExtResource("1_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -868,7 +868,8 @@ texture = ExtResource("1_0e48y")
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
 [node name="HazardSensor" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 3
+collision_layer = 2
+collision_mask = 0
 
 [node name="HazardDetector" type="CollisionShape2D" parent="CharacterBody2D/HazardSensor"]
 position = Vector2(-213, 38)
