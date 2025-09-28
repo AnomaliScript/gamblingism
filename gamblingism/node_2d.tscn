@@ -1,13 +1,36 @@
-[gd_scene load_steps=13 format=4 uid="uid://bgrr857fbe8yt"]
+[gd_scene load_steps=28 format=4 uid="uid://bgrr857fbe8yt"]
 
-[ext_resource type="Texture2D" uid="uid://bkqv5mmp0ataj" path="res://images/icon.jpg" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://bm0wfcogjh840" path="res://node_2d.gd" id="1_0hol4"]
 [ext_resource type="Script" uid="uid://dl76a783rs88t" path="res://character_body_2d.gd" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://c156w6biv35ns" path="res://images/Textures-16.png" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://d2300atkyu6rj" path="res://Charaline-Sheet.png" id="3_kdubu"]
 [ext_resource type="Script" uid="uid://cjlul3q64qs0i" path="res://spawn_point.gd" id="5_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://ve5sr55fd2xv" path="res://BLUE_RING-sheet.png" id="6_d21ai"]
 [ext_resource type="Texture2D" uid="uid://dfncaw4e8gpy3" path="res://Sprite-0005.png" id="6_kdubu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d21ai"]
+atlas = ExtResource("3_kdubu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj586"]
+atlas = ExtResource("3_kdubu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4d7sh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d21ai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj586")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
 size = Vector2(26, 26)
@@ -838,6 +861,84 @@ texture = ExtResource("1_wtcfe")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_epypp")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d7sh"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir8iy"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqns4"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0ka3"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h7mo"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr8wp"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2bti"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta5nu"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flf07"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k73cj"]
+atlas = ExtResource("6_d21ai")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rjqkl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d7sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir8iy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqns4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0ka3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h7mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr8wp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2bti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta5nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flf07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k73cj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
 texture = ExtResource("6_kdubu")
 0:0/0 = 0
@@ -856,9 +957,9 @@ script = ExtResource("1_epypp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_0e48y")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_0e48y")
+[node name="MainAnimation" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_4d7sh")
+autoplay = "default"
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
@@ -874,6 +975,12 @@ tile_set = SubResource("TileSet_0hol4")
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 script = ExtResource("5_q6r6c")
+
+[node name="RespawnPoint" type="AnimatedSprite2D" parent="SpawnPoint"]
+position = Vector2(-16, 37)
+sprite_frames = SubResource("SpriteFrames_rjqkl")
+autoplay = "default"
+frame_progress = 0.19385335
 
 [node name="Hazards" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAIAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAFAAAAAAAAAAAAAAA=")
