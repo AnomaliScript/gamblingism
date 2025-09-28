@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=4 uid="uid://bgrr857fbe8yt"]
+[gd_scene load_steps=13 format=4 uid="uid://bgrr857fbe8yt"]
 
 [ext_resource type="Texture2D" uid="uid://bkqv5mmp0ataj" path="res://images/icon.jpg" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://bm0wfcogjh840" path="res://node_2d.gd" id="1_0hol4"]
 [ext_resource type="Script" uid="uid://dl76a783rs88t" path="res://character_body_2d.gd" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://c156w6biv35ns" path="res://images/Textures-16.png" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cjlul3q64qs0i" path="res://spawn_point.gd" id="5_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://dfncaw4e8gpy3" path="res://Sprite-0005.png" id="6_kdubu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdubu"]
+size = Vector2(26, 26)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_wtcfe")
@@ -834,7 +838,16 @@ texture = ExtResource("1_wtcfe")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_epypp")
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
+texture = ExtResource("6_kdubu")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.359718, -5.93534, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_rj586"]
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_d21ai")
+
+[node name="Level" type="Node2D"]
 script = ExtResource("1_0hol4")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -847,9 +860,21 @@ shape = SubResource("RectangleShape2D_0e48y")
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_0e48y")
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="HazardSensor" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 2
+
+[node name="HazardDetector" type="CollisionShape2D" parent="CharacterBody2D/HazardSensor"]
+shape = SubResource("RectangleShape2D_kdubu")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAEAAEAAAABAA0AAAAFAAEAAAABAA0AAAAGAAEAAAABAA0AAAAGAAIAAAABAA0AAAAGAAMAAAABAA0AAAAGAAQAAAABAA0AAAAHAAQAAAABAA0AAAAIAAQAAAABAA0AAAAIAAMAAAABAA0AAAAJAAMAAAABAA0AAAAKAAMAAAABAA0AAAALAAMAAAABAA0AAAAMAAMAAAABAA0AAAANAAMAAAABAA0AAAAOAAMAAAABAA0AAAAPAAMAAAABAA0AAAD+/wMAAAABAA0AAAD//wMAAAABAA0AAAAAAAMAAAABAA0AAAABAAMAAAABAA0AAAAFAAAAAAAHAAwAAAA=")
+tile_map_data = PackedByteArray("AAAEAAEAAAABAA0AAAAFAAEAAAABAA0AAAAGAAEAAAABAA0AAAAGAAIAAAABAA0AAAAGAAMAAAABAA0AAAAGAAQAAAABAA0AAAAHAAQAAAABAA0AAAAIAAQAAAABAA0AAAAIAAMAAAABAA0AAAAJAAMAAAABAA0AAAAKAAMAAAABAA0AAAALAAMAAAABAA0AAAAMAAMAAAABAA0AAAANAAMAAAABAA0AAAAOAAMAAAABAA0AAAAPAAMAAAABAA0AAAD+/wMAAAABAA0AAAD//wMAAAABAA0AAAAAAAMAAAABAA0AAAABAAMAAAABAA0AAAA=")
 tile_set = SubResource("TileSet_0hol4")
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 script = ExtResource("5_q6r6c")
+
+[node name="Hazards" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAIAAIAAAAAAAAAAAALAAIAAAAAAAAAAAAFAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_rj586")
