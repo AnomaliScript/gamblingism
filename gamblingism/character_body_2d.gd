@@ -21,14 +21,14 @@ var _orig_layer := 0
 var _orig_mask := 0
 
 func _ready() -> void:
-	SpawnPoint.set_from(spawn_point)   # OK if you added it as "Respawn"
+	SpawnPoint.set_from(spawn_point)
 	_orig_layer = collision_layer
 	_orig_mask = collision_mask
+	#$"HazardSensor".body_entered.connect(_on_hazard_detector_body_entered)
 	# If you want to start at spawn on load:
 	# global_transform = Respawn.get()
 
 func _physics_process(delta: float) -> void:
-	# Instant death if you fell off the map
 	if _kill_conditions():
 		velocity.x = 0.0
 		velocity.y = 0.0
@@ -45,9 +45,9 @@ func _physics_process(delta: float) -> void:
 
 	# Horizontal move (rename to your actual actions!)
 	var dash := Input.is_action_pressed("dash")
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move left"):
 		velocity.x = -SPEED * (DASH_MULT if dash else 1.0)
-	elif Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("move right"):
 		velocity.x =  SPEED * (DASH_MULT if dash else 1.0)
 	else:
 		velocity.x = 0.0
@@ -56,16 +56,15 @@ func _physics_process(delta: float) -> void:
 	
 func _kill_conditions():
 	if (global_position.y > KILL_Y 
-		or _on_hazard_detector_body_entered(self)
+		#or _on_hazard_detector_body_entered(self)
 		# or condition
 		):
 		return true
 	else:
 		return false
 
-func _on_hazard_detector_body_entered(body: Node2D):
-	if body.is_in_group("hazards"):
-		return true
+#func _on_hazard_detector_body_entered(body: Node2D):
+	#return true
 
 # Single, authoritative death handler
 func die() -> void:

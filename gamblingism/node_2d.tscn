@@ -966,7 +966,7 @@ autoplay = "default"
 [node name="HazardSensor" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 2
 
-[node name="HazardCollision" type="CollisionShape2D" parent="CharacterBody2D/HazardSensor"]
+[node name="HazardDetector" type="CollisionShape2D" parent="CharacterBody2D/HazardSensor"]
 shape = SubResource("RectangleShape2D_kdubu")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
