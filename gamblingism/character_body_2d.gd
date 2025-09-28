@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal died
+signal died(dead: CharacterBody2D)
 
 var _spawn: Transform2D = Transform2D.IDENTITY
 func set_from(node: Node2D) -> void: _spawn = node.global_transform
@@ -15,6 +15,8 @@ const JUMP_VELOCITY := -300.0
 const KILL_Y := 2000.0
 const DASH_MULT: float = 1.5     # speed multiplier while dash held
 var gravity : float = float(ProjectSettings.get_setting("physics/2d/default_gravity"))
+var hazard_contact: bool = false
+
 
 # (Optional) remember original collision masks to restore
 var _orig_layer := 0
@@ -24,9 +26,10 @@ func _ready() -> void:
 	SpawnPoint.set_from(spawn_point)
 	_orig_layer = collision_layer
 	_orig_mask = collision_mask
-	#$"HazardSensor".body_entered.connect(_on_hazard_detector_body_entered)
+	$"HazardSensor".body_entered.connect(func(_body): hazard_contact = true)
+	$"HazardSensor".body_exited.connect(func(_body): hazard_contact = false)
 	# If you want to start at spawn on load:
-	# global_transform = Respawn.get()
+	#global_transform = SpawnPoint.get()
 
 func _physics_process(delta: float) -> void:
 	if _kill_conditions():
@@ -73,15 +76,12 @@ func _physics_process(delta: float) -> void:
 	
 func _kill_conditions():
 	if (global_position.y > KILL_Y 
-		#or _on_hazard_detector_body_entered(self)
+		or hazard_contact
 		# or condition
 		):
 		return true
 	else:
 		return false
-
-#func _on_hazard_detector_body_entered(body: Node2D):
-	#return true
 
 # Single, authoritative death handler
 func die() -> void:
