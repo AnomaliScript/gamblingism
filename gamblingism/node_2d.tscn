@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c156w6biv35ns" path="res://images/Textures-16.png" id="1_wtcfe"]
 [ext_resource type="Script" uid="uid://cq6enxb0ri2w4" path="res://animated_sprite_2d.gd" id="4_d21ai"]
 [ext_resource type="Script" uid="uid://cjlul3q64qs0i" path="res://spawn_point.gd" id="5_q6r6c"]
-[ext_resource type="Texture2D" uid="uid://dfncaw4e8gpy3" path="res://Sprite-0005.png" id="6_kdubu"]
+[ext_resource type="Texture2D" uid="uid://b8y45vfoy1r50" path="res://Sprite-0005.png" id="6_kdubu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
 
@@ -847,13 +847,15 @@ texture = ExtResource("6_kdubu")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.359718, -5.93534, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_rj586"]
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_d21ai")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_0hol4")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 2
 script = ExtResource("1_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -866,9 +868,10 @@ texture = ExtResource("1_0e48y")
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
 [node name="HazardSensor" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 3
 
 [node name="HazardDetector" type="CollisionShape2D" parent="CharacterBody2D/HazardSensor"]
+position = Vector2(-213, 38)
 shape = SubResource("RectangleShape2D_kdubu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]

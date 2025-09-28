@@ -1,46 +1,63 @@
 extends Node2D
 
 @onready var player: CharacterBody2D = $CharacterBody2D
-@onready var spawn: Node2D = $SpawnPoint
+@onready var spawn_point: Node2D = $SpawnPoint
 @onready var player_sprite: Sprite2D = $CharacterBody2D/Sprite2D
+@onready var player_shape: CollisionShape2D = $CharacterBody2D/CollisionShape2D
+
+# Pick the physics layer you use for world/solids so the corpse collides.
+# Example: layer 1 = World.
+const CORPSE_LAYER: int = 1
+const CORPSE_MASK:  int = 1  # collide with World (and the player if your player mask includes World)
 
 func _ready() -> void:
-	var globals = get_node("/root/Globals")  # Absolute path to autoload
-	globals.respawn_position = $SpawnPoint.global_position  # Assumes SpawnPoint is a child here
-	# ensure player begins at spawn
-	player.global_position = spawn.global_position
-	# listen for death
+	# start at spawn
+	player.global_position = spawn_point.global_position
+	# listen for deaths
 	player.died.connect(_on_player_died)
 
-func _on_player_died(dead: CharacterBody2D) -> void:
-	_leave_corpse(dead)
-	_respawn_same_player(dead)
+func _on_player_died(death_pos: Vector2) -> void:
+	_drop_corpse(death_pos)
+	_teleport_player_to_spawn()
 
-func _leave_corpse(dead: CharacterBody2D) -> void:
-	# make a "costume" corpse (plain Sprite2D) at the death spot
-	var corpse := Sprite2D.new()
-	corpse.global_position = dead.global_position
-	corpse.rotation = 0.0            # set to deg2rad(90) if you want it to look fallen over
-	corpse.z_index = 0               # bump if it appears behind tiles
+func _teleport_player_to_spawn() -> void:
+	player.velocity = Vector2.ZERO
+	player.rotation = 0.0
+	player.scale = Vector2.ONE               # prevents “getting bigger” if spawn had scale
+	player.global_position = spawn_point.global_position
+	player.set_physics_process(true)         # if you ever disable it on death
 
-	# copy visual from the player's Sprite2D
-	corpse.texture = player_sprite.texture
-	corpse.flip_h = player_sprite.flip_h
-	corpse.flip_v = player_sprite.flip_v
-	corpse.region_enabled = player_sprite.region_enabled
-	corpse.region_rect = player_sprite.region_rect
-	corpse.modulate = player_sprite.modulate
-
+func _drop_corpse(at_pos: Vector2) -> void:
+	# Make a collideable “costume” using a StaticBody2D
+	var corpse := StaticBody2D.new()
+	corpse.global_position = at_pos
+	corpse.collision_layer = CORPSE_LAYER
+	corpse.collision_mask  = CORPSE_MASK
 	add_child(corpse)
 
-	# (optional) fade out & clean up after N seconds
-	# get_tree().create_timer(10.0).timeout.connect(corpse.queue_free)
+	# Visual: copy the player’s Sprite2D look
+	var cs := Sprite2D.new()
+	cs.texture = player_sprite.texture
+	cs.region_enabled = player_sprite.region_enabled
+	cs.region_rect = player_sprite.region_rect
+	cs.flip_h = player_sprite.flip_h
+	cs.flip_v = player_sprite.flip_v
+	cs.modulate = player_sprite.modulate
+	cs.z_index = player_sprite.z_index
+	corpse.add_child(cs)
 
-func _respawn_same_player(dead: CharacterBody2D) -> void:
-	dead.velocity = Vector2.ZERO
-	dead.global_position = spawn.global_position
+	# Collider: duplicate the player’s shape so it collides like the player
+	var shape_node := CollisionShape2D.new()
+	# Deep-copy the Shape resource so later edits don’t affect both
+	if player_shape.shape:
+		shape_node.shape = player_shape.shape.duplicate(true)
+		shape_node.position = player_shape.position
+		shape_node.rotation = player_shape.rotation
+		shape_node.scale    = player_shape.scale
+	corpse.add_child(shape_node)
 
-	# Called when the node enters the scene tree for the first time.
-	# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	# Optional: rotate/settle the corpse a bit to look “dead”
+	# cs.rotation = deg2rad(90)
+
+	# Optional auto-cleanup (e.g., after 15s)
+	# get_tree().create_timer(15.0).timeout.connect(corpse.queue_free)
