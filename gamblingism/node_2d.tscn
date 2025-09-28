@@ -1090,6 +1090,7 @@ animations = [{
 script = ExtResource("1_0hol4")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(196, 86)
 script = ExtResource("1_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -1123,7 +1124,7 @@ tile_set = SubResource("TileSet_rj586")
 tile_set = SubResource("TileSet_4d7sh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, 33)
+position = Vector2(198, 118)
 sprite_frames = SubResource("SpriteFrames_rjqkl")
 animation = &"new_animation"
 frame_progress = 0.10072148
