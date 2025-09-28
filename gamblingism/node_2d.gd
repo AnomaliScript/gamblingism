@@ -30,8 +30,6 @@ func _teleport_player_to_spawn() -> void:
 func _drop_corpse(at_pos: Vector2) -> void:
 	# Make a collideable “costume” using a StaticBody2D
 	var corpse := StaticBody2D.new()
-	corpse.scale.x = 0.05
-	corpse.scale.y = 0.05
 	corpse.global_position = at_pos
 	corpse.collision_layer = CORPSE_LAYER
 	corpse.collision_mask  = CORPSE_MASK
